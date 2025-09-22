@@ -1,23 +1,31 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, Alert } from "react-native";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { router } from "expo-router";
+import { auth } from "../firebase/config";
 import styles from "./styles";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = () => {
-    //handle login logic
-  };
+  const handleSubmit = async () => {
+    if (!email || !password) {
+      Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
 
-  const handleForgotPassword = () => {
-    //handle forgot password logic
-  }
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      Alert.alert("Success", "Logged in successfully!");
+    } catch (error) {
+      Alert.alert("Error", "Login failed. Please check your credentials.");
+    }
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        {/* Will include logo and title with description */}
         <Image
           source={require("../../assets/images/logo.png")}
           style={styles.logo}
@@ -27,7 +35,6 @@ export default function Login() {
       </View>
 
       <View style={styles.form}>
-        {/* Form for login and submit button */}
         <View style={styles.input}>
           <Text style={styles.text}>Email</Text>
           <TextInput
@@ -56,15 +63,11 @@ export default function Login() {
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={handleForgotPassword}>
-            <Text style={styles.forgotPassword}>Forgot Password?</Text>
-        </TouchableOpacity>
       </View>
 
       <View style={styles.footer}>
-        {/* Will include link to change to register */}
         <Text style={styles.footerText}>Don&apos;t have an account?</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push('/register')}>
           <Text style={styles.footerLink}> Sign Up</Text>
         </TouchableOpacity>
       </View>

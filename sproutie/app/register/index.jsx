@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, Alert } from "react-native";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { router } from "expo-router";
+import { auth } from "../firebase/config";
 import styles from "./styles";
 
 export default function Register() {
@@ -7,8 +10,23 @@ export default function Register() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const handleRegister = () => {
-        // handle registration logic
+    const handleRegister = async () => {
+        if (!email || !password || !confirmPassword) {
+            Alert.alert("Error", "Please fill in all fields");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            Alert.alert("Error", "Passwords do not match");
+            return;
+        }
+
+        try {
+            await createUserWithEmailAndPassword(auth, email, password);
+            Alert.alert("Success", "Account created successfully!");
+        } catch (error) {
+            Alert.alert("Error", "Registration failed. Please try again.");
+        }
     };
 
     return (
@@ -66,7 +84,7 @@ export default function Register() {
 
             <View style={styles.footer}>
                 <Text style={styles.footerText}>Already have an account?</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => router.push('/login')}>
                     <Text style={styles.footerLink}> Login</Text>
                 </TouchableOpacity>
             </View>
