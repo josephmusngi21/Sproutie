@@ -39,7 +39,7 @@ export default function Login() {
       setPassword("");
     } catch (error) {
       console.error("Login error:", error);
-      
+
       // Handle specific Firebase errors
       let errorMessage = "An error occurred during login";
       if (error.code === 'auth/user-not-found') {
@@ -52,8 +52,10 @@ export default function Login() {
         errorMessage = "This account has been disabled";
       } else if (error.code === 'auth/too-many-requests') {
         errorMessage = "Too many failed attempts. Please try again later";
+      } else if (error.message) {
+        errorMessage = error.message;
       }
-      
+
       Alert.alert("Login Error", errorMessage);
     } finally {
       setLoading(false);
