@@ -11,14 +11,8 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Login />
-      {/* 
-        To switch between Login and Register, you can use state.
-        Example:
-        const [showLogin, setShowLogin] = React.useState(true);
-        {showLogin ? <Login /> : <Register />}
-        <Button title={showLogin ? "Go to Register" : "Go to Login"} onPress={() => setShowLogin(!showLogin)} />
-      */}
+      <Register />
+      
     </View>
   );
 }
