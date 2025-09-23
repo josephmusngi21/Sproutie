@@ -4,7 +4,7 @@ SPROUTIE APP - DEVELOPMENT TASKS
 IMMEDIATE PRIORITIES:
 - Fix Firebase Auth persistence (AsyncStorage) - CRITICAL
 - Update login/register components to use new switch system
-- Test MongoDB user API integration
++ Test MongoDB user API integration
 
 PLANT DATA & API:
 - grab plant infos from api and move to mongodb
