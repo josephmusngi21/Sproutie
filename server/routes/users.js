@@ -61,7 +61,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// GET /api/users/:firebaseUid - Get user by Firebase UID
+// GET /api/users/:firebaseUid - Retrieve a user by their Firebase UID
 router.get('/:firebaseUid', async (req, res) => {
   try {
     const user = await User.findByFirebaseUid(req.params.firebaseUid);
