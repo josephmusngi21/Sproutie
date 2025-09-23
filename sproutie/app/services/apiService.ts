@@ -1,4 +1,5 @@
-// Simplified API service for backend communication
+// API service to interact with the backend server
+// Handles user creation, retrieval, and other API calls
 const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.0.17:3000';
 
 interface UserData {
