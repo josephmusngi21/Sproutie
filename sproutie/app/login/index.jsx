@@ -21,7 +21,6 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
-    // Input validation
     if (!email || !password) {
       Alert.alert("Error", "Please fill in all fields");
       return;
