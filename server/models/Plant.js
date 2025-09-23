@@ -44,7 +44,7 @@ const userPlantSchema = new mongoose.Schema({
     nextDue: { type: Date }
   }],
   
-  isActive: { type: Boolean, default: true }, // Is user still growing this plant
+  isActive: { type: Boolean, default: true }, 
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });
