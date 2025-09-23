@@ -76,18 +76,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         letterSpacing: 0.5,
     },
-    footer: {
-        display: 'flex',
-        flexDirection: 'row',
-        marginTop: 12,
-        alignItems: 'center',
-    },
-    formFooter: {
-        marginTop: 12,
-        alignItems: 'center',
-        width: '100%',
-    },
-    forgotPassword: {
+        forgotPassword: {
         color: '#388e3c',
         fontSize: 12,
         marginTop: 10,
@@ -95,17 +84,28 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
         fontWeight: '500',
     },
-    footerText: {
-        fontSize: 14,
-        color: '#388e3c',
-        fontWeight: '500',
-    },
-    footerLink: {
-        color: '#2e7d32',
-        fontSize: 14,
-        fontWeight: 'bold',
-        textDecorationLine: 'underline',
-    },
+    // footer: {
+    //     display: 'flex',
+    //     flexDirection: 'row',
+    //     marginTop: 12,
+    //     alignItems: 'center',
+    // },
+    // formFooter: {
+    //     marginTop: 12,
+    //     alignItems: 'center',
+    //     width: '100%',
+    // },
+    // footerText: {
+    //     fontSize: 14,
+    //     color: '#388e3c',
+    //     fontWeight: '500',
+    // },
+    // footerLink: {
+    //     color: '#2e7d32',
+    //     fontSize: 14,
+    //     fontWeight: 'bold',
+    //     textDecorationLine: 'underline',
+    // },
 });
 
 export default styles;

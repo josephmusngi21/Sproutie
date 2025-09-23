@@ -13,7 +13,6 @@ import {
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { router } from "expo-router";
 import { auth } from "../firebase/config";
-import apiService from "../services/apiService";
 import styles from "./styles";
 
 export default function Register() {
@@ -42,40 +41,14 @@ export default function Register() {
         setLoading(true);
 
         try {
-            // Step 1: Create user in Firebase
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const firebaseUser = userCredential.user;
+            console.log("User registered successfully:", userCredential.user);
+            Alert.alert("Success", "Account created successfully!");
             
-            console.log("Firebase user created:", firebaseUser.uid);
-
-            // Step 2: Create user in MongoDB
-            try {
-                const userData = {
-                    firebaseUid: firebaseUser.uid,
-                    email: firebaseUser.email,
-                    displayName: firebaseUser.displayName,
-                    emailVerified: firebaseUser.emailVerified
-                };
-
-                const response = await apiService.createUser(userData);
-                console.log("MongoDB user created:", response);
-
-                Alert.alert("Success", "Account created successfully!");
-                
-                // Clear form
-                setEmail("");
-                setPassword("");
-                setConfirmPassword("");
-
-            } catch (mongoError) {
-                console.error("MongoDB error:", mongoError);
-                Alert.alert(
-                    "Partial Success", 
-                    "Account created but profile setup failed. You can still log in.",
-                    [{ text: "OK", onPress: () => router.push('/login') }]
-                );
-            }
-
+            // Clear form
+            setEmail("");
+            setPassword("");
+            setConfirmPassword("");
         } catch (error) {
             console.error("Registration error:", error);
             
@@ -164,12 +137,12 @@ export default function Register() {
                         </View>
                     </View>
 
-                    <View style={styles.footer}>
+                    {/* <View style={styles.footer}>
                         <Text style={styles.footerText}>Already have an account?</Text>
                         <TouchableOpacity onPress={() => router.push('/login')}>
                             <Text style={styles.footerLink}> Login</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                 </View>
             </ScrollView>
         </KeyboardAvoidingView>

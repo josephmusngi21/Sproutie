@@ -95,17 +95,17 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
         fontWeight: '500',
     },
-    footerText: {
-        fontSize: 14,
-        color: '#388e3c',
-        fontWeight: '500',
-    },
-    footerLink: {
-        color: '#2e7d32',
-        fontSize: 14,
-        fontWeight: 'bold',
-        textDecorationLine: 'underline',
-    },
+    // footerText: {
+    //     fontSize: 14,
+    //     color: '#388e3c',
+    //     fontWeight: '500',
+    // },
+    // footerLink: {
+    //     color: '#2e7d32',
+    //     fontSize: 14,
+    //     fontWeight: 'bold',
+    //     textDecorationLine: 'underline',
+    // },
 });
 
 export default styles;

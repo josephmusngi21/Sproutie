@@ -147,13 +147,12 @@ export default function Login() {
             </TouchableOpacity>
           </View>
 
-          <View style={styles.footer}>
-            {/* Will include link to change to register */}
+          {/* <View style={styles.footer}>
             <Text style={styles.footerText}>Don&apos;t have an account?</Text>
             <TouchableOpacity onPress={() => router.push('/register')}>
               <Text style={styles.footerLink}> Sign Up</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
