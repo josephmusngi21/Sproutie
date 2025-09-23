@@ -1,0 +1,79 @@
+SPROUTIE APP - DEVELOPMENT TASKS
+================================
+
+IMMEDIATE PRIORITIES:
+- Fix Firebase Auth persistence (AsyncStorage) - CRITICAL
+- Update login/register components to use new switch system
+- Test MongoDB user API integration
+
+PLANT DATA & API:
+- grab plant infos from api and move to mongodb
+- Make page to display all plants
+- Add Search for certain plants
+- Create plant detail view pages
+- Add plant categories/filtering
+
+USER MANAGEMENT:
+- Complete user profile management
+- Add user preferences/settings
+- Handle user authentication states properly
+
+USER LOCATION & ENVIRONMENT:
+! Grab user location (GPS/manual entry)
+! Grab daily temperature info (weather API integration)
+! Store location data in user profile
+! Add location permission handling
+
+PERSONAL PLANT MANAGEMENT:
+! Allow users to add personal plants
+! Grab info on plants and how often they should be watered
+! Save plant info on defaultDay database
+! Create "My Plants" section in app
+! Add plant care reminders/notifications
+! Allow users to upload plant photos
+
+SMART WATERING SYSTEM:
+! Grab info on defaultDay and using location temperature info, adjust planting info
+! Display planting info with climate adjustments
+! Create watering schedule calculator
+! Add seasonal adjustments
+
+ONGOING/BACKGROUND TASKS:
+% Keep checking periodically for change in weather info to adjust planting info
+% Background sync for plant data updates
+% Push notifications for plant care reminders
+% Data backup and sync across devices
+
+TECHNICAL IMPROVEMENTS:
+- Add proper error handling throughout app
+- Implement offline mode/data caching
+- Add loading states for all API calls
+- Optimize performance for large plant databases
+- Add data validation on all forms
+- Implement proper TypeScript types throughout
+
+UI/UX ENHANCEMENTS:
+- Design consistent styling system
+- Add plant care calendar view
+- Create onboarding flow for new users
+- Add dark mode support
+- Improve accessibility features
+- Add plant care tips and guides
+
+FUTURE FEATURES (Eventually):
+!= Add plant disease identification (AI/ML)
+!= Social features (share plant progress)
+!= Plant care community/forums
+!= Integration with smart home devices
+!= Plant marketplace/trading
+!= Advanced analytics on plant health
+!= Weather alerts for plant protection
+
+TESTING & DEPLOYMENT:
+- Add unit tests for core functions
+- Add integration tests for API calls
+- Test on different devices/screen sizes
+- Performance testing with large datasets
+- Beta testing with real users
+- App store deployment preparation
+
