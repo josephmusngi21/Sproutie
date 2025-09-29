@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import Login from './login/index';
 import Register from './register/index';
-import styles from './styles'
+import styles from './styles';
 
 export default function Index() {
   const [showLogin, setShowLogin] = useState(true);
