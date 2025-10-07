@@ -25,6 +25,7 @@ connectDB();
 
 // Routes
 app.use('/api/users', require('./routes/users'));
+app.use('/api/plants', require('./routes/plants'));
 
 // Health check
 app.get('/health', (req, res) => {
@@ -38,7 +39,7 @@ app.get('/health', (req, res) => {
 app.get('/', (req, res) => {
   res.json({
     message: 'Sproutie API Server',
-    endpoints: ['/health', '/api/users']
+    endpoints: ['/health', '/api/users', '/api/plants']
   });
 });
 
@@ -49,9 +50,10 @@ app.use((error, req, res, next) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📱 API: http://localhost:${PORT}`);
+  console.log(`🌐 Network: http://192.168.0.17:${PORT}`);
   console.log(`🏥 Health: http://localhost:${PORT}/health`);
 });
 
