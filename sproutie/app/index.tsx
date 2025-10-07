@@ -2,11 +2,21 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import Login from './login/index';
 import Register from './register/index';
+import PlantsScreen from './screens/plants/index';
 import styles from './styles';
 
 export default function Index() {
   const [showLogin, setShowLogin] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
+
+  const handleLoginSuccess = () => {
+    setLoggedIn(true);
+  };
+
+  // If user is logged in, show the main app (PlantsScreen)
+  if (loggedIn) {
+    return <PlantsScreen />;
+  }
 
   const Footer = () => {
     return (
@@ -26,7 +36,11 @@ export default function Index() {
   }
   return (
     <View style={styles.container}>
-      {showLogin ? <Login /> : <Register />}
+      {showLogin ? (
+        <Login onLoginSuccess={handleLoginSuccess} />
+      ) : (
+        <Register />
+      )}
       <Footer />
     </View>
   );
