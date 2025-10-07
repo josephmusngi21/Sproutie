@@ -11,11 +11,10 @@ import {
     Platform 
 } from "react-native";
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
-import { router } from "expo-router";
 import { auth } from "../firebase/config";
 import styles from "./styles";
 
-export default function Login() {
+export default function Login({ onLoginSuccess }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -31,11 +30,15 @@ export default function Login() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("User logged in successfully:", userCredential.user);
-      Alert.alert("Success", "Logged in successfully!");
       
       // Clear form
       setEmail("");
       setPassword("");
+      
+      // Navigate to main app
+      if (onLoginSuccess) {
+        onLoginSuccess();
+      }
     } catch (error) {
       console.error("Login error:", error);
 
