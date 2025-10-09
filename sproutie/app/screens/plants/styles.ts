@@ -51,6 +51,57 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderTopColor: "#d0e6d7",
     },
+    button: {
+        backgroundColor: "#2e7d32",
+        padding: 12,
+        borderRadius: 8,
+        alignItems: "center",
+    },
+    buttonDisabled: {
+        backgroundColor: "#cccccc",
+        padding: 12,
+        borderRadius: 8,
+        alignItems: "center",
+    },
+    buttonText: {
+        color: "white",
+        fontWeight: "bold",
+    },
+    plantItem: {
+        backgroundColor: "#f8f9fa",
+        padding: 12,
+        marginVertical: 4,
+        borderRadius: 8,
+        borderLeftWidth: 4,
+        borderLeftColor: "#2e7d32",
+    },
+    plantName: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "#2e7d32",
+    },
+    plantScientificName: {
+        fontSize: 14,
+        fontStyle: "italic",
+        color: "#666",
+    },
+    plantFamily: {
+        fontSize: 12,
+        color: "#888",
+        marginTop: 4,
+    },
+    plantsListContainer: {
+        marginTop: 16,
+    },
+    plantsListTitle: {
+        fontSize: 18,
+        fontWeight: "bold",
+        marginBottom: 12,
+        color: "#2e7d32",
+    },
+    plantsScrollView: {
+        maxHeight: 400,
+    },
 });
 
 export default styles;
