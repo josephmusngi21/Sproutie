@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Text, ScrollView } from "react-native";
 import styles from "./styles";
 
 // Use the same API base URL as the main API service
-const API_URL = 'http://192.168.0.17:3000'; // Update this to match your server IP
+const API_URL = process.env.EXPO_PUBLIC_API_URL || '';
 
 export default function PlantsScreen() {
     const [loading, setLoading] = useState(false);
@@ -72,7 +72,7 @@ export default function PlantsScreen() {
             <View style={styles.plantContainer}>
                 <View>
                     <Menu />
-                    <View style={{ marginVertical: 16 }}>
+                    <View style={styles.buttonContainer}>
                         <TouchableOpacity
                             onPress={showPlants}
                             disabled={loading}
