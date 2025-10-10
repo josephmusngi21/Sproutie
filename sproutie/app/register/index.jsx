@@ -11,7 +11,6 @@ import {
     Platform 
 } from "react-native";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { router } from "expo-router";
 import { auth } from "../firebase/config";
 import styles from "./styles";
 
