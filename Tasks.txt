@@ -7,16 +7,16 @@ IMMEDIATE PRIORITIES:
 + Test MongoDB user API integration
 
 PLANT DATA & API:
-- grab plant infos from api and move to mongodb
-- Make page to display all plants
-- Add Search for certain plants
+[X] grab plant infos from api and move to mongodb (COMPLETED - Trefle API integrated)
+[X] Make page to display all plants (COMPLETED - PlantsScreen shows all plants from API)
+[X] Add Search for certain plants (COMPLETED - SearchPlants screen with save functionality)
 - Create plant detail view pages
 - Add plant categories/filtering
 
 USER MANAGEMENT:
 - Complete user profile management
 - Add user preferences/settings
-- Handle user authentication states properly
+[X] Handle user authentication states properly (COMPLETED - Firebase Auth with login/register)
 
 USER LOCATION & ENVIRONMENT:
 ! Grab user location (GPS/manual entry)
@@ -25,10 +25,10 @@ USER LOCATION & ENVIRONMENT:
 ! Add location permission handling
 
 PERSONAL PLANT MANAGEMENT:
-! Allow users to add personal plants
-! Grab info on plants and how often they should be watered
-! Save plant info on defaultDay database
-! Create "My Plants" section in app
+[X] Allow users to add personal plants (COMPLETED - Users can search and save plants)
+[X] Grab info on plants and how often they should be watered (COMPLETED - Plant data from Trefle API)
+[X] Save plant info on defaultDay database (COMPLETED - UserPlant model in MongoDB)
+[X] Create "My Plants" section in app (COMPLETED - SearchPlants screen shows saved plants)
 ! Add plant care reminders/notifications
 ! Allow users to upload plant photos
 
@@ -45,20 +45,22 @@ ONGOING/BACKGROUND TASKS:
 % Data backup and sync across devices
 
 TECHNICAL IMPROVEMENTS:
-- Add proper error handling throughout app
+[X] Add proper error handling throughout app (COMPLETED - Try/catch blocks in all API calls)
 - Implement offline mode/data caching
-- Add loading states for all API calls
+[X] Add loading states for all API calls (COMPLETED - Loading indicators in all screens)
 - Optimize performance for large plant databases
 - Add data validation on all forms
 - Implement proper TypeScript types throughout
+[X] Environment variable management (COMPLETED - .env file with API_URL)
 
 UI/UX ENHANCEMENTS:
-- Design consistent styling system
+[X] Design consistent styling system (COMPLETED - Separate styles.ts files for all screens)
 - Add plant care calendar view
 - Create onboarding flow for new users
 - Add dark mode support
 - Improve accessibility features
 - Add plant care tips and guides
+[X] Bottom tab navigation (COMPLETED - Home screen with Plants/Search/More tabs)
 
 FUTURE FEATURES (Eventually):
 != Add plant disease identification (AI/ML)
@@ -77,3 +79,6 @@ TESTING & DEPLOYMENT:
 - Beta testing with real users
 - App store deployment preparation
 
+-=-=-=-=-=-=-=-=-=-=-=
+INSPO
+https://dribbble.com/shots/14398925-Task-Management-App-Inner-Screens
