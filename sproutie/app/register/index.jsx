@@ -15,6 +15,8 @@ import { router } from "expo-router";
 import { auth } from "../firebase/config";
 import styles from "./styles";
 
+const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.0.17:3000';
+
 export default function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -41,8 +43,39 @@ export default function Register() {
         setLoading(true);
 
         try {
+            // Step 1: Create Firebase user
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            console.log("User registered successfully:", userCredential.user);
+            const user = userCredential.user;
+            console.log("Firebase user created:", user.uid);
+            
+            // Step 2: Save user to MongoDB
+            try {
+                const response = await fetch(`${API_URL}/api/users`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        firebaseUid: user.uid,
+                        email: user.email,
+                        displayName: user.displayName || null,
+                        emailVerified: user.emailVerified
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    console.warn("MongoDB user creation failed:", data.error);
+                    // Continue anyway since Firebase user was created
+                } else {
+                    console.log("User saved to MongoDB:", data.user);
+                }
+            } catch (mongoError) {
+                console.error("MongoDB error:", mongoError);
+                // Continue anyway since Firebase user was created
+            }
+            
             Alert.alert("Success", "Account created successfully!");
             
             // Clear form
