@@ -8,7 +8,15 @@ const userPlantSchema = new mongoose.Schema({
   scientificName: { type: String, required: true },
   commonName: { type: String },
   family: { type: String },
+  familyCommonName: { type: String },
   genus: { type: String },
+  imageUrl: { type: String },
+  year: { type: Number },
+  author: { type: String },
+  bibliography: { type: String },
+  status: { type: String },
+  rank: { type: String },
+  synonyms: [{ type: String }],
   
   // User-specific data
   firebaseUid: { type: String, required: true }, // User who saved this plant
