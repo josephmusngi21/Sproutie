@@ -15,8 +15,8 @@ import { auth } from "../firebase/config";
 import styles from "./styles";
 
 export default function Login({ onLoginSuccess }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("test@gmail.com");
+  const [password, setPassword] = useState("test@0321");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
@@ -100,7 +100,6 @@ export default function Login({ onLoginSuccess }) {
       >
         <View style={styles.container}>
           <View style={styles.header}>
-            {/* Will include logo and title with description */}
             <Image
               source={require("../../assets/images/logo.png")}
               style={styles.logo}
@@ -149,13 +148,6 @@ export default function Login({ onLoginSuccess }) {
                 <Text style={styles.forgotPassword}>Forgot Password?</Text>
             </TouchableOpacity>
           </View>
-
-          {/* <View style={styles.footer}>
-            <Text style={styles.footerText}>Don&apos;t have an account?</Text>
-            <TouchableOpacity onPress={() => router.push('/register')}>
-              <Text style={styles.footerLink}> Sign Up</Text>
-            </TouchableOpacity>
-          </View> */}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
