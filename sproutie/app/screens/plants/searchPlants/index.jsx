@@ -38,13 +38,17 @@ export default function SearchPlants() {
         const user = getCurrentUser();
         if (!user) return alert('Please log in to save plants');
 
+        console.log('Saving plant for user:', user.uid);
+        console.log('Plant data:', plant);
+
         try {
-            await apiCall('/api/plants/save', {
+            const response = await apiCall('/api/plants/save', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId: user.uid, plantData: plant })
             });
             
+            console.log('Plant saved successfully:', response);
             alert(`${plant.common_name || plant.scientific_name} saved!`);
             setSavedPlantIds(prev => new Set([...prev, plant.id]));
             loadUserPlants();
