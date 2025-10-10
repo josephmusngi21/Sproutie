@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 // User's personal plant collection (saved from Trefle API)
 const userPlantSchema = new mongoose.Schema({
   // Trefle API data
-  trefleId: { type: Number, required: true }, // Trefle plant ID
-  slug: { type: String, required: true }, // Trefle plant slug
+  trefleId: { type: Number, required: true },
+  slug: { type: String, required: true }, 
   scientificName: { type: String, required: true },
   commonName: { type: String },
   family: { type: String },
