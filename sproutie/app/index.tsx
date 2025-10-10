@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import Login from './login/index';
 import Register from './register/index';
-import PlantsScreen from './screens/plants/index';
+import HomeScreen from './screens/home/index';
 import styles from './styles';
 
 export default function Index() {
@@ -13,9 +13,9 @@ export default function Index() {
     setLoggedIn(true);
   };
 
-  // If user is logged in, show the main app (PlantsScreen)
+  // If user is logged in, show the main app (HomeScreen with tabs)
   if (loggedIn) {
-    return <PlantsScreen />;
+    return <HomeScreen />;
   }
 
   const Footer = () => {
