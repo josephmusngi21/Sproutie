@@ -102,6 +102,9 @@ const styles = StyleSheet.create({
     plantsScrollView: {
         maxHeight: 400,
     },
+    buttonContainer: {
+        marginVertical: 16,
+    },
 });
 
 export default styles;
