@@ -1,12 +1,5 @@
 const fetch = require('node-fetch');
 
-// Example usage:
-// (async () => {
-//   const response = await fetch('https://trefle.io/api/v1/plants?token=YOUR_TREFLE_TOKEN');
-//   const json = await response.json();
-//   console.log(json);
-// })();
-
 class TrefleAPI {
   constructor() {
     this.baseURL = 'https://trefle.io/api/v1';
@@ -17,13 +10,18 @@ class TrefleAPI {
     }
   }
 
-  // Get flowering plants
-  async getPlants(options = {}) {
-    console.log("🌱 TrefleAPI.getPlants() called! Options:", options);
-    const response = await fetch(`https://trefle.io/api/v1/plants?token=${this.apiToken}`);
-    const json = await response.json();
-    console.log("🌱 TrefleAPI response received:", json);
-    return json;
+  async _fetch(endpoint) {
+    const url = `${this.baseURL}${endpoint}${endpoint.includes('?') ? '&' : '?'}token=${this.apiToken}`;
+    const response = await fetch(url);
+    return response.json();
+  }
+
+  async getPlants() {
+    return this._fetch('/plants');
+  }
+
+  async searchPlants(query) {
+    return this._fetch(`/plants/search?q=${encodeURIComponent(query)}`);
   }
 }
 
