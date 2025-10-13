@@ -72,6 +72,35 @@ router.post('/save', async (req, res) => {
   }
 });
 
+// Need post remove plant
+
+
+router.post('/remove', async (req, res) => {
+  try {
+    const { userId, plantId } = req.body;
+    if (!userId || !plantId) {
+      return res.status(400).json({ error: 'userId and plantId required' });
+    }
+
+    const plant = await UserPlant.findOneAndDelete({ 
+      firebaseUid: userId, 
+      _id: plantId 
+    });
+    
+    if (!plant) {
+      return res.status(404).json({ error: 'Plant not found' });
+    }
+    
+    res.json({ message: 'Plant removed', plant });
+  } catch (error) {
+    console.error('Remove error:', error);
+    res.status(500).json({ error: 'Failed to remove plant' });
+  }
+});
+
+
+
+
 // GET /api/plants/user/:userId - Get user's plants
 router.get('/user/:userId', async (req, res) => {
   try {
