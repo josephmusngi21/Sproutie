@@ -89,7 +89,7 @@ router.delete('/delete/:plantId', async (req, res) => {
     });
     
     if (!plant) {
-      console.log('⚠️  Plant not found or already removed');
+      console.log('Plant not found or already removed');
       return res.status(404).json({ error: 'Plant not found' });
     }
     
