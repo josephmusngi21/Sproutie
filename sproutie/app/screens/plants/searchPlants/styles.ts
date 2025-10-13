@@ -137,6 +137,12 @@ export default StyleSheet.create({
     borderRadius: 8,
     padding: 12,
     marginBottom: 8,
+    justifyContent: 'space-between',
+  },
+  savedPlantContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
   },
   plantImageSmall: {
     width: 60,
@@ -157,6 +163,20 @@ export default StyleSheet.create({
   savedPlantFamily: {
     fontSize: 14,
     color: '#666',
+  },
+  removeButton: {
+    backgroundColor: '#dc3545',
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 8,
+  },
+  removeButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   emptyText: {
     textAlign: 'center',

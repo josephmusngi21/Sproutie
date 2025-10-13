@@ -34,25 +34,29 @@ export default function SearchPlants() {
         }
     };
 
-    const removePlant = async (plantId) => {
-        // Removes plant from user's saved list
+    const removePlant = async (plantId, plantName) => {
         const user = getCurrentUser();
         if (!user) return alert('Please log in to remove plants');
-            // Removes plants from user's saved list
+        
+        console.log('Removing plant:', plantId, 'for user:', user.uid);
+        
         try {
-            const response = await apiCall(`/api/plants/remove`, {
+            const response = await apiCall(`/api/plants/delete/${plantId}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ userId: user.uid, plantId })
+                body: JSON.stringify({ userId: user.uid })
             });
+            
             console.log('Plant removed successfully:', response);
-            // Need to update UI
-
+            alert(`${plantName} removed from your collection!`);
+            
+            // Update UI - reload plants
+            loadUserPlants();
         } catch (error) {
+            console.error('Remove error details:', error);
             alert('Failed to remove: ' + error.message);
         }
-
-    }
+    };
 
     const savePlant = async (plant) => {
         const user = getCurrentUser();
@@ -154,30 +158,46 @@ export default function SearchPlants() {
             console.log('💡 Tip: Use Trefle ID to fetch detailed care info from API');
         };
 
+        const handleRemove = () => {
+            const plantName = plant.commonName || plant.scientificName;
+            removePlant(plant._id, plantName);
+        };
+
         return (
-            <TouchableOpacity 
-                style={styles.savedPlantItem}
-                onPress={handlePlantPress}
-                activeOpacity={0.7}
-            >
-                {plant.imageUrl && (
-                    <Image 
-                        source={{ uri: plant.imageUrl }} 
-                        style={styles.plantImageSmall}
-                        resizeMode="cover"
-                    />
-                )}
-                <View style={styles.savedPlantInfo}>
-                    <Text style={styles.savedPlantName}>
-                        {plant.commonName || plant.scientificName}
-                    </Text>
-                    {plant.family && (
-                        <Text style={styles.savedPlantFamily}>
-                            {plant.family}
-                        </Text>
+            <View style={styles.savedPlantItem}>
+                <TouchableOpacity 
+                    style={styles.savedPlantContent}
+                    onPress={handlePlantPress}
+                    activeOpacity={0.7}
+                >
+                    {plant.imageUrl && (
+                        <Image 
+                            source={{ uri: plant.imageUrl }} 
+                            style={styles.plantImageSmall}
+                            resizeMode="cover"
+                        />
                     )}
-                </View>
-            </TouchableOpacity>
+                    <View style={styles.savedPlantInfo}>
+                        <Text style={styles.savedPlantName}>
+                            {plant.commonName || plant.scientificName}
+                        </Text>
+                        {plant.family && (
+                            <Text style={styles.savedPlantFamily}>
+                                {plant.family}
+                            </Text>
+                        )}
+                    </View>
+                </TouchableOpacity>
+                
+                {/* Remove Button */}
+                <TouchableOpacity 
+                    style={styles.removeButton}
+                    onPress={handleRemove}
+                    activeOpacity={0.7}
+                >
+                    <Text style={styles.removeButtonText}>✕</Text>
+                </TouchableOpacity>
+            </View>
         );
     };
 
