@@ -34,6 +34,26 @@ export default function SearchPlants() {
         }
     };
 
+    const removePlant = async (plantId) => {
+        // Removes plant from user's saved list
+        const user = getCurrentUser();
+        if (!user) return alert('Please log in to remove plants');
+            // Removes plants from user's saved list
+        try {
+            const response = await apiCall(`/api/plants/remove`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId: user.uid, plantId })
+            });
+            console.log('Plant removed successfully:', response);
+            // Need to update UI
+
+        } catch (error) {
+            alert('Failed to remove: ' + error.message);
+        }
+
+    }
+
     const savePlant = async (plant) => {
         const user = getCurrentUser();
         if (!user) return alert('Please log in to save plants');
@@ -120,87 +140,113 @@ export default function SearchPlants() {
     );
 
     // User's saved plant item
-    const SavedPlantItem = ({ plant }) => (
-        <View style={styles.savedPlantItem}>
-            {plant.imageUrl && (
-                <Image 
-                    source={{ uri: plant.imageUrl }} 
-                    style={styles.plantImageSmall}
-                    resizeMode="cover"
-                />
-            )}
-            <View style={styles.savedPlantInfo}>
-                <Text style={styles.savedPlantName}>
-                    {plant.commonName || plant.scientificName}
-                </Text>
-                {plant.family && (
-                    <Text style={styles.savedPlantFamily}>
-                        {plant.family}
-                    </Text>
+    const SavedPlantItem = ({ plant }) => {
+        const handlePlantPress = () => {
+            console.log('========== PLANT INFO ==========');
+            console.log('🌿 Common Name:', plant.commonName || 'N/A');
+            console.log('🔬 Scientific Name:', plant.scientificName);
+            console.log('👨‍🔬 Family:', plant.family);
+            console.log('🧬 Genus:', plant.genus);
+            console.log('📊 Rank:', plant.rank);
+            console.log('📋 Status:', plant.status);
+            console.log('🆔 Trefle ID:', plant.trefleId);
+            console.log('================================');
+            console.log('💡 Tip: Use Trefle ID to fetch detailed care info from API');
+        };
+
+        return (
+            <TouchableOpacity 
+                style={styles.savedPlantItem}
+                onPress={handlePlantPress}
+                activeOpacity={0.7}
+            >
+                {plant.imageUrl && (
+                    <Image 
+                        source={{ uri: plant.imageUrl }} 
+                        style={styles.plantImageSmall}
+                        resizeMode="cover"
+                    />
                 )}
+                <View style={styles.savedPlantInfo}>
+                    <Text style={styles.savedPlantName}>
+                        {plant.commonName || plant.scientificName}
+                    </Text>
+                    {plant.family && (
+                        <Text style={styles.savedPlantFamily}>
+                            {plant.family}
+                        </Text>
+                    )}
+                </View>
+            </TouchableOpacity>
+        );
+    };
+
+    // Render search section with results
+    const renderSearchSection = () => (
+        <View style={styles.searchSection}>
+            <Text style={styles.title}>Search Plants</Text>
+            
+            <View style={styles.searchContainer}>
+                <TextInput
+                    style={styles.searchInput}
+                    placeholder="Search for plants (e.g., coconut, rose, oak)..."
+                    value={searchQuery}
+                    onChangeText={setSearchQuery}
+                    onSubmitEditing={searchPlants}
+                />
+                <TouchableOpacity 
+                    style={[styles.searchButton, loading && styles.buttonDisabled]}
+                    onPress={searchPlants}
+                    disabled={loading}
+                >
+                    {loading ? (
+                        <ActivityIndicator color="#fff" />
+                    ) : (
+                        <Text style={styles.searchButtonText}>🔍 Search</Text>
+                    )}
+                </TouchableOpacity>
             </View>
+
+            {/* Search Results */}
+            {searchResults.length > 0 && (
+                <View style={styles.resultsSection}>
+                    <Text style={styles.resultsTitle}>
+                        Found {searchResults.length} plants
+                    </Text>
+                    {searchResults.map((plant) => (
+                        <SearchResultItem key={plant.id} plant={plant} />
+                    ))}
+                </View>
+            )}
+        </View>
+    );
+
+    // Render user's saved plants section
+    const renderSavedPlants = () => (
+        <View style={styles.savedSection}>
+            <View style={styles.savedHeader}>
+                <Text style={styles.savedTitle}>My Plants ({userPlants.length})</Text>
+                <TouchableOpacity onPress={loadUserPlants}>
+                    <Text style={styles.refreshButton}>🔄 Refresh</Text>
+                </TouchableOpacity>
+            </View>
+            
+            {userPlants.length > 0 ? (
+                userPlants.map((plant) => (
+                    <SavedPlantItem key={plant._id} plant={plant} />
+                ))
+            ) : (
+                <Text style={styles.emptyText}>
+                    No plants saved yet. Search and add plants above!
+                </Text>
+            )}
         </View>
     );
 
     return (
         <ScrollView style={styles.container}>
-            {/* Search Section */}
-            <View style={styles.searchSection}>
-                <Text style={styles.title}>Search Plants</Text>
-                
-                <View style={styles.searchContainer}>
-                    <TextInput
-                        style={styles.searchInput}
-                        placeholder="Search for plants (e.g., coconut, rose, oak)..."
-                        value={searchQuery}
-                        onChangeText={setSearchQuery}
-                        onSubmitEditing={searchPlants}
-                    />
-                    <TouchableOpacity 
-                        style={[styles.searchButton, loading && styles.buttonDisabled]}
-                        onPress={searchPlants}
-                        disabled={loading}
-                    >
-                        {loading ? (
-                            <ActivityIndicator color="#fff" />
-                        ) : (
-                            <Text style={styles.searchButtonText}>🔍 Search</Text>
-                        )}
-                    </TouchableOpacity>
-                </View>
-
-                {/* Search Results */}
-                {searchResults.length > 0 && (
-                    <View style={styles.resultsSection}>
-                        <Text style={styles.resultsTitle}>
-                            Found {searchResults.length} plants
-                        </Text>
-                        {searchResults.map((plant) => (
-                            <SearchResultItem key={plant.id} plant={plant} />
-                        ))}
-                    </View>
-                )}
-            </View>
-
-            {/* User's Saved Plants Section */}
-            <View style={styles.savedSection}>
-                <View style={styles.savedHeader}>
-                    <Text style={styles.savedTitle}>My Plants ({userPlants.length})</Text>
-                    <TouchableOpacity onPress={loadUserPlants}>
-                        <Text style={styles.refreshButton}>🔄 Refresh</Text>
-                    </TouchableOpacity>
-                </View>
-                
-                {userPlants.length > 0 ? (
-                    userPlants.map((plant) => (
-                        <SavedPlantItem key={plant._id} plant={plant} />
-                    ))
-                ) : (
-                    <Text style={styles.emptyText}>
-                        No plants saved yet. Search and add plants above!
-                    </Text>
-                )}
-            </View>
+            {renderSearchSection()}
+            {renderSavedPlants()}
         </ScrollView>
     );
 }
