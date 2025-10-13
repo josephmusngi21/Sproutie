@@ -3,12 +3,12 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#fff',
   },
   searchSection: {
     padding: 16,
+    paddingTop: 65,
     backgroundColor: '#fff',
-    marginBottom: 8,
   },
   title: {
     fontSize: 24,
@@ -112,6 +112,7 @@ export default StyleSheet.create({
   },
   savedSection: {
     padding: 16,
+    paddingBottom: 40,
     backgroundColor: '#fff',
   },
   savedHeader: {

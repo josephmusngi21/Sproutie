@@ -143,7 +143,11 @@ export default function SearchPlants() {
     );
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView 
+            style={styles.container}
+            contentContainerStyle={{ paddingBottom: 20 }}
+            showsVerticalScrollIndicator={false}
+        >
             {/* Search Section */}
             <View style={styles.searchSection}>
                 <Text style={styles.title}>Search Plants</Text>

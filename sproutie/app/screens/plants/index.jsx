@@ -9,11 +9,6 @@ export default function PlantsScreen() {
     const [loading, setLoading] = useState(false);
     const [plants, setPlants] = useState([]);
 
-
-    const Menu = () => (
-        <View style={styles.menuContainer}></View>
-    );
-
     const PlantItem = ({ plant }) => (
         <View style={styles.plantItem}>
             <Text style={styles.plantName}>
@@ -59,19 +54,10 @@ export default function PlantsScreen() {
         }
     };
 
-    const header = () => (
-        <View style={styles.headerContainer}></View>
-    );
-
-    const footer = () => (
-        <View style={styles.footerContainer}></View>
-    );
-
     return (
         <View style={styles.container}>
             <View style={styles.plantContainer}>
                 <View>
-                    <Menu />
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity
                             onPress={showPlants}
