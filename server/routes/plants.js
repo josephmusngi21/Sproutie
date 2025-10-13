@@ -72,12 +72,13 @@ router.post('/save', async (req, res) => {
   }
 });
 
-// Need post remove plant
-
-
-router.post('/remove', async (req, res) => {
+// DELETE /api/plants/delete/:plantId - Remove plant from user's collection
+router.delete('/delete/:plantId', async (req, res) => {
   try {
-    const { userId, plantId } = req.body;
+    const { plantId } = req.params;
+    const { userId } = req.body;
+    console.log('🗑️  Remove plant request - userId:', userId, 'plantId:', plantId);
+    
     if (!userId || !plantId) {
       return res.status(400).json({ error: 'userId and plantId required' });
     }
@@ -88,18 +89,17 @@ router.post('/remove', async (req, res) => {
     });
     
     if (!plant) {
+      console.log('⚠️  Plant not found or already removed');
       return res.status(404).json({ error: 'Plant not found' });
     }
     
-    res.json({ message: 'Plant removed', plant });
+    console.log('✅ Plant removed successfully:', plant.scientificName);
+    res.json({ message: 'Plant removed successfully', plant });
   } catch (error) {
-    console.error('Remove error:', error);
+    console.error('❌ Remove error:', error);
     res.status(500).json({ error: 'Failed to remove plant' });
   }
 });
-
-
-
 
 // GET /api/plants/user/:userId - Get user's plants
 router.get('/user/:userId', async (req, res) => {
