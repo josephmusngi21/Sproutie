@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#f6f8f3",
+        backgroundColor: "#fff",
     },
     headerContainer: {
         height: 60,
@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        marginVertical: 16,
+        marginTop: 60,
+        marginBottom: 16,
         marginHorizontal: 16,
         backgroundColor: "#ffffff",
         borderRadius: 12,
@@ -32,7 +33,8 @@ const styles = StyleSheet.create({
     },
     plantContainer: {
         flex: 1,
-        margin: 16,
+        marginHorizontal: 16,
+        marginBottom: 40,
         backgroundColor: "#fff",
         borderRadius: 16,
         padding: 16,
@@ -101,9 +103,11 @@ const styles = StyleSheet.create({
     },
     plantsScrollView: {
         maxHeight: 400,
+        marginBottom: 16,
     },
     buttonContainer: {
-        marginVertical: 16,
+        marginTop: 100,
+        marginBottom: 16,
     },
 });
 
