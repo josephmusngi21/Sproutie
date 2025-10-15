@@ -100,7 +100,7 @@ export default function SearchPlants() {
      * 6. Handle errors with user-friendly messages
      * 
      * @example
-     * // User types "rose" and clicks search button
+     *  User types "rose" and clicks search button
      * searchPlants(); // Calls GET /api/plants/search?q=rose
      */
     const searchPlants = async () => {
@@ -135,8 +135,8 @@ export default function SearchPlants() {
      * 
      * @example
      * removePlant('67abc123def456', 'Rose');
-     * // Calls DELETE /api/plants/delete/67abc123def456
-     * // Shows alert: "Rose removed from your collection!"
+     * Calls DELETE /api/plants/delete/67abc123def456
+     * Shows alert: "Rose removed from your collection!"
      */
     const removePlant = async (plantId, plantName) => {
         const user = getCurrentUser();
@@ -195,7 +195,7 @@ export default function SearchPlants() {
      *   ...
      * };
      * savePlant(searchResult);
-     * // Saves to MongoDB and disables "Save" button
+     * Saves to MongoDB and disables "Save" button
      */
     const savePlant = async (plant) => {
         const user = getCurrentUser();
