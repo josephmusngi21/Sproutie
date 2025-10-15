@@ -2,7 +2,6 @@ import { useState } from "react";
 import { View, TouchableOpacity, Text, ScrollView } from "react-native";
 import styles from "./styles";
 
-// Use the same API base URL as the main API service
 const API_URL = process.env.EXPO_PUBLIC_API_URL || '';
 
 export default function PlantsScreen() {
