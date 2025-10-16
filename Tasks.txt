@@ -82,3 +82,28 @@ TESTING & DEPLOYMENT:
 -=-=-=-=-=-=-=-=-=-=-=
 INSPO
 https://dribbble.com/shots/14398925-Task-Management-App-Inner-Screens
+
+
+-=-=-=-=-=-=-=-=-=
+
+Current To Do:
+
+Specific Implementation Order:
+Add location functionality to Profile screen
+Create weather service (similar pattern to your location service)
+Update server User model to store location/weather preferences
+Test the integration
+
+Steps:
+
+1. Grab user location (GPS/manual entry)
+You already have the locationService.ts created
+Integrate it into your existing screens (maybe add a location button to the profile screen)
+Add location permission handling to your app
+2. Grab daily temperature info (weather API integration)
+Create a weather service similar to your location service
+Use a weather API (OpenWeatherMap, WeatherAPI, etc.)
+Combine with location data you'll get from step 1
+3. Store location data in user profile
+Update your User model in the server to include location fields
+Modify the user API endpoints to save/retrieve location data
