@@ -1,3 +1,24 @@
+/**
+ * Login Component
+ * 
+ * Handles user authentication using Firebase Auth. Provides email/password login
+ * functionality with comprehensive error handling and password reset capabilities.
+ * 
+ * Features:
+ * - Email/password authentication via Firebase
+ * - Input validation and error handling
+ * - Password reset functionality
+ * - Loading states and user feedback
+ * - Keyboard-aware scrollable interface
+ * - Cross-platform compatibility (iOS/Android)
+ * 
+ * @module components/Login
+ * @requires react
+ * @requires react-native
+ * @requires firebase/auth
+ * @param {Function} onLoginSuccess - Callback function executed after successful login
+ */
+
 import React, { useState } from "react";
 import { 
     View, 
@@ -14,11 +35,36 @@ import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/aut
 import { auth } from "../firebase/config";
 import styles from "./styles";
 
+/**
+ * Login - Main authentication component
+ * 
+ * @component
+ * @param {Object} props - Component props
+ * @param {Function} props.onLoginSuccess - Callback executed after successful authentication
+ * @returns {JSX.Element} The rendered Login screen
+ */
 export default function Login({ onLoginSuccess }) {
+  // ============================================================
+  // STATE MANAGEMENT
+  // ============================================================
+  
+  /** User's email input - pre-filled with test credentials for development */
   const [email, setEmail] = useState("test@gmail.com");
+  
+  /** User's password input - pre-filled with test credentials for development */
   const [password, setPassword] = useState("test@0321");
+  
+  /** Loading state to prevent multiple submissions and show loading UI */
   const [loading, setLoading] = useState(false);
 
+  // ============================================================
+  // AUTHENTICATION HANDLERS
+  // ============================================================
+
+  /**
+   * Handles the login form submission
+   * Validates inputs, authenticates user via Firebase, and handles success/error states
+   */
   const handleSubmit = async () => {
     if (!email || !password) {
       Alert.alert("Error", "Please fill in all fields");
@@ -64,6 +110,10 @@ export default function Login({ onLoginSuccess }) {
     }
   };
 
+  /**
+   * Handles password reset functionality
+   * Sends a password reset email to the user's registered email address
+   */
   const handleForgotPassword = async () => {
     if (!email) {
       Alert.alert("Error", "Please enter your email address first");
@@ -86,6 +136,10 @@ export default function Login({ onLoginSuccess }) {
       Alert.alert("Error", errorMessage);
     }
   };
+
+  // ============================================================
+  // RENDER
+  // ============================================================
 
   return (
     <KeyboardAvoidingView 

@@ -1,3 +1,25 @@
+/**
+ * Register Component
+ * 
+ * Handles user registration with dual authentication system:
+ * 1. Creates Firebase Auth user account for authentication
+ * 2. Saves user data to MongoDB via API for application data
+ * 
+ * Features:
+ * - Email/password registration with confirmation
+ * - Input validation (email format, password strength, matching passwords)
+ * - Dual-database user creation (Firebase + MongoDB)
+ * - Comprehensive error handling for both systems
+ * - Loading states and user feedback
+ * - Keyboard-aware scrollable interface
+ * - Cross-platform compatibility (iOS/Android)
+ * 
+ * @module components/Register
+ * @requires react
+ * @requires react-native
+ * @requires firebase/auth
+ */
+
 import React, { useState } from "react";
 import { 
     View, 
@@ -14,14 +36,48 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/config";
 import styles from "./styles";
 
+// API base URL from environment variables with fallback for development
 const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.0.17:3000';
 
+/**
+ * Register - Main user registration component
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered Register screen
+ */
 export default function Register() {
+    // ============================================================
+    // STATE MANAGEMENT
+    // ============================================================
+    
+    /** User's email input for registration */
     const [email, setEmail] = useState("");
+    
+    /** User's password input */
     const [password, setPassword] = useState("");
+    
+    /** Password confirmation to ensure user typed correctly */
     const [confirmPassword, setConfirmPassword] = useState("");
+    
+    /** Loading state to prevent multiple submissions and show loading UI */
     const [loading, setLoading] = useState(false);
 
+    // ============================================================
+    // REGISTRATION HANDLER
+    // ============================================================
+
+    /**
+     * Handles the complete user registration process
+     * 
+     * Process:
+     * 1. Validates all input fields
+     * 2. Creates Firebase Auth user account
+     * 3. Saves user data to MongoDB via API
+     * 4. Handles success/error states appropriately
+     * 
+     * @async
+     * @function
+     */
     const handleRegister = async () => {
         // Input validation
         if (!email || !password || !confirmPassword) {
@@ -42,12 +98,12 @@ export default function Register() {
         setLoading(true);
 
         try {
-            // Step 1: Create Firebase user
+            // Step 1: Create Firebase Auth user for authentication
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
             console.log("Firebase user created:", user.uid);
             
-            // Step 2: Save user to MongoDB
+            // Step 2: Save user data to MongoDB for application features
             try {
                 const response = await fetch(`${API_URL}/api/users`, {
                     method: 'POST',
@@ -99,6 +155,10 @@ export default function Register() {
             setLoading(false);
         }
     };
+
+    // ============================================================
+    // RENDER
+    // ============================================================
 
     return (
         <KeyboardAvoidingView 
