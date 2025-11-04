@@ -113,7 +113,7 @@ export default function Login({ onLoginSuccess }) {
             <View style={styles.input}>
               <Text style={styles.text}>Email</Text>
               <TextInput
-                style={styles.textInput}
+                style={styles.textInput--
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
